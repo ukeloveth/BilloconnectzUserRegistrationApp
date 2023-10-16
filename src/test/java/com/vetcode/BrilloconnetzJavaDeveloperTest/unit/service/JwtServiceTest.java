@@ -59,5 +59,4 @@ public class JwtServiceTest {
         assertEquals("verification fails", verificationResult);
     }
 
-    // more test cases
 }

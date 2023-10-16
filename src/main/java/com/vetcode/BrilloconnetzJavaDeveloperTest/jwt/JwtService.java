@@ -4,28 +4,28 @@ import com.vetcode.BrilloconnetzJavaDeveloperTest.dto.UserInputDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
-//@Service
-@Configuration
-public class JwtService {
-    @Value("${app.jwt.secret}")
-    private String jwtSecret;
 
-    @Value("${app.jwt.expiration}")
-    private long jwtExpiration;
+@Slf4j
+@Component
+public class JwtService {
+
+    private final String jwtSecret = "JWTSecret";
+    private final long jwtExpiration = 604800000;
 
 
     public String generateToken(UserDetails userDetails) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + jwtExpiration);
+        System.out.println(jwtSecret);
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
@@ -33,6 +33,7 @@ public class JwtService {
                 .setExpiration(expiration)
                 .signWith(SignatureAlgorithm.HS256, jwtSecret)
                 .compact();
+
     }
 
     public String generateTokenForValidatedUser(UserInputDto validatedUser) {

@@ -2,7 +2,7 @@ package com.vetcode.BrilloconnetzJavaDeveloperTest.service;
 
 import com.vetcode.BrilloconnetzJavaDeveloperTest.dto.UserInputDto;
 import com.vetcode.BrilloconnetzJavaDeveloperTest.jwt.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+@Slf4j
 @Service
 public class ValidationService {
 
